@@ -1,5 +1,6 @@
 package org.tisserand.robin.testfirebase;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,11 +16,17 @@ import com.firebase.client.Firebase;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    public final static String TASK_CHOOSER_NAME = "org.tisserand.robin.testfirebase.TASK_CHOOSER_NAME";
+    public final static String TASK_CHOOSER_VALUE = "org.tisserand.robin.testfirebase.TASK_CHOOSER_VALUE";
+
     private static final String TAG = "RMain";
+    private static final int TASK_CHOOSER_REQUEST = 1;
+
     private Firebase rootRef;
 
     @Override
@@ -64,28 +71,56 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (TASK_CHOOSER_REQUEST == requestCode) {
+            String msg;
+            if (RESULT_OK == resultCode) {
+                Log.i("RobinMain", "result is OK");
+                String name = data.getStringExtra(TASK_CHOOSER_NAME);
+                int value = data.getIntExtra(TASK_CHOOSER_VALUE, 0);
+                msg = name + " : " + value;
+                Log.d("RobinMain", msg);
+
+                Firebase postRef = rootRef.child(name);
+                Map<String, Object> postData = new HashMap<String, Object>();
+                postData.put("date", "" + new Date());
+                postData.put("value", value);
+                postRef.push().setValue(postData);
+
+                // user feedback
+                Snackbar.make( findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+            if (RESULT_CANCELED == resultCode) {
+                Log.i("RobinMain", "result is CANCELED");
+            }
+        }
+    }
+
     public void onSelect(View view) {
-        String message = "Good Job";
-        Firebase postRef;
+        String message = "Selected: ";
+        String name = "";
         switch (view.getId()) {
             case R.id.button_armand:
-                message += " Armand!";
-                postRef = rootRef.child("armand");
+                message += "Armand";
+                name = "armand";
                 break;
             case R.id.button_hisae:
-                message += " Hisae!";
-                postRef = rootRef.child("hisae");
+                message += "Hisae";
+                name = "hisae";
                 break;
             default:
-                message += "/!\\ WTF !!!! /!\\";
-                postRef = rootRef.child("bob");
+                // should never happened
                 break;
         }
-        Map<String, Object> postData = new HashMap<String, Object>();
-        postData.put("date", "" + new Date());
-        postData.put("value", -5);
-        postRef.push().setValue(postData);
-        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+
+        //Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+        //        .setAction("Action", null).show();
+
+        // Create new activity
+        Intent intent = new Intent(this, TaskChooser.class);
+        intent.putExtra(TASK_CHOOSER_NAME, name);
+        startActivityForResult(intent, TASK_CHOOSER_REQUEST);
     }
 }
