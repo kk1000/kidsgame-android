@@ -1,4 +1,4 @@
-package org.tisserand.robin.testfirebase;
+package org.tisserand.robin.kidsgame;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

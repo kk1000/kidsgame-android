@@ -1,4 +1,4 @@
-package org.tisserand.robin.testfirebase;
+package org.tisserand.robin.kidsgame;
 
 import org.junit.Test;
 

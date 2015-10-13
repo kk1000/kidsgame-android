@@ -1,4 +1,4 @@
-package org.tisserand.robin.testfirebase;
+package org.tisserand.robin.kidsgame;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,13 +16,12 @@ import com.firebase.client.Firebase;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String TASK_CHOOSER_NAME = "org.tisserand.robin.testfirebase.TASK_CHOOSER_NAME";
-    public final static String TASK_CHOOSER_VALUE = "org.tisserand.robin.testfirebase.TASK_CHOOSER_VALUE";
+    public final static String TASK_CHOOSER_NAME = "org.tisserand.robin.kidsgame.TASK_CHOOSER_NAME";
+    public final static String TASK_CHOOSER_VALUE = "org.tisserand.robin.kidsgame.TASK_CHOOSER_VALUE";
 
     private static final String TAG = "RMain";
     private static final int TASK_CHOOSER_REQUEST = 1;
