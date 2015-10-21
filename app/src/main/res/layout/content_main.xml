@@ -21,7 +21,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Armand"
+            android:text="@string/armand"
             android:id="@+id/button_armand"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.42"
@@ -33,7 +33,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hisae"
+            android:text="@string/hisae"
             android:id="@+id/button_hisae"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.42"

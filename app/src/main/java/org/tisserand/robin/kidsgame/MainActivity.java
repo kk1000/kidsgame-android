@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
@@ -40,10 +42,11 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), AListView.class);
+                startActivity(intent);
             }
         });
+
 
         rootRef = new Firebase("https://torid-torch-6190.firebaseio.com/");
     }
@@ -82,14 +85,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("RobinMain", msg);
 
                 Firebase postRef = rootRef.child(name);
-                Map<String, Object> postData = new HashMap<String, Object>();
+                Map<String, Object> postData = new HashMap<>();
                 postData.put("date", "" + new Date());
                 postData.put("value", value);
                 postRef.push().setValue(postData);
 
                 // user feedback
-                Snackbar.make( findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
             }
             if (RESULT_CANCELED == resultCode) {
                 Log.i("RobinMain", "result is CANCELED");
@@ -98,25 +100,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSelect(View view) {
-        String message = "Selected: ";
-        String name = "";
-        switch (view.getId()) {
-            case R.id.button_armand:
-                message += "Armand";
-                name = "armand";
-                break;
-            case R.id.button_hisae:
-                message += "Hisae";
-                name = "hisae";
-                break;
-            default:
-                // should never happened
-                break;
-        }
-
-        //Snackbar.make(view, message, Snackbar.LENGTH_LONG)
-        //        .setAction("Action", null).show();
-
+        // do'nt use anymore mapping between button id and string.
+        String name = ((Button) view).getText().toString();
+        // Log.d("Text from button", name);
         // Create new activity
         Intent intent = new Intent(this, TaskChooser.class);
         intent.putExtra(TASK_CHOOSER_NAME, name);
