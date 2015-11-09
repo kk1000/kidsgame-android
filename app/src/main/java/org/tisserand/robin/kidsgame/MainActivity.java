@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (TASK_CHOOSER_REQUEST == requestCode) {
-            String msg;
+            final String msg;
             if (RESULT_OK == resultCode) {
                 Log.i("RobinMain", "result is OK");
                 String name = data.getStringExtra(TASK_CHOOSER_NAME);
@@ -97,10 +98,18 @@ public class MainActivity extends AppCompatActivity {
                 Map<String, Object> postData = new HashMap<>();
                 postData.put("date", "" + new Date());
                 postData.put("value", value);
-                postRef.push().setValue(postData);
+                postRef.push().setValue(postData, new Firebase.CompletionListener() {
+                    @Override
+                    public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                        if (firebaseError != null) {
+                            Toast.makeText(getApplicationContext(), "Failed to update DB:" + firebaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
-                // user feedback
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+
             }
             if (RESULT_CANCELED == resultCode) {
                 Log.i("RobinMain", "result is CANCELED");
