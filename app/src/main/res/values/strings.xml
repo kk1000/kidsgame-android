@@ -3,4 +3,8 @@
     <string name="action_settings">Settings</string>
     <string name="armand">armand</string>
     <string name="hisae">hisae</string>
+    <string name="db_url">https://torid-torch-6190.firebaseio.com/</string>
+    <string name="pref_db_title">Database URL</string>
+    <string name="pref_db_login">Database login</string>
+    <string name="pref_db_password">Database password</string>
 </resources>
