@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-<EditTextPreference
-    android:key="pref_db_url"
-    android:title="@string/pref_db_title"
-    android:defaultValue="@string/db_url"/>
+    <PreferenceCategory
+        android:key="pref_db"
+        android:title="@string/pref_db_connection">
+        <EditTextPreference
+            android:key="pref_db_url"
+            android:title="@string/pref_db_url"
+            android:defaultValue="@string/db_url"/>
+        <CheckBoxPreference
+            android:key="pref_db_auth_require"
+            android:title="@string/pref_db_auth_require"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_db_auth"
+        android:title="@string/pref_db_auth"
+        >
+        <EditTextPreference
+            android:key="pref_db_login"
+            android:title="@string/pref_db_login"/>
+        <EditTextPreference
+            android:key="pref_db_password"
+            android:title="@string/pref_db_password" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Youpi">
+    </PreferenceCategory>
 </PreferenceScreen>

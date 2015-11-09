@@ -4,7 +4,10 @@
     <string name="armand">armand</string>
     <string name="hisae">hisae</string>
     <string name="db_url">https://torid-torch-6190.firebaseio.com/</string>
-    <string name="pref_db_title">Database URL</string>
-    <string name="pref_db_login">Database login</string>
-    <string name="pref_db_password">Database password</string>
+    <string name="pref_db_connection">Database connection</string>
+    <string name="pref_db_url">URL</string>
+    <string name="pref_db_auth_require">Authentication needed</string>
+    <string name="pref_db_auth">Database Authentication</string>
+    <string name="pref_db_login">Login</string>
+    <string name="pref_db_password">Password</string>
 </resources>
