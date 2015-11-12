@@ -19,10 +19,12 @@
         >
         <EditTextPreference
             android:key="pref_db_login"
-            android:title="@string/pref_db_login"/>
+            android:title="@string/pref_db_login"
+            android:inputType="textEmailAddress"/>
         <EditTextPreference
             android:key="pref_db_password"
-            android:title="@string/pref_db_password" />
+            android:title="@string/pref_db_password"
+            android:inputType="textPassword"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="Youpi">
